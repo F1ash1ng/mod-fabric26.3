@@ -26,9 +26,9 @@
 
 - Minecraft **26.3**
 - Fabric Loader **0.19.5 或更新版本**
-- Fabric API（对应 Minecraft 26.3 的版本）
+- Fabric API **0.162.0+26.3**
 - Java **25 或更新版本**
-- JEI：可选
+- JEI **31.12.0.65**：可选
 
 将编译生成的 `smart-crafter-1.0.0.jar` 和 Fabric API 放入实例的 `mods` 文件夹。使用整合包或启动器时，请确认它们与 Minecraft 26.3 兼容。
 
