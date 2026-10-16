@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "smartcrafter-test",
+  "version": "1.0.0",
+  "name": "Smart Crafter Tests",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "dev.smartcrafter.gametest.CrafterTemplatePersistenceGameTest",
+      "dev.smartcrafter.gametest.HopperCrafterInputGameTest"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.3",
+    "smartcrafter": "*"
+  }
+}

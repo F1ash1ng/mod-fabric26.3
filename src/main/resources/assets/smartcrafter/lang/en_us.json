@@ -1,0 +1,18 @@
+{
+  "screen.smartcrafter.open_recipes": "Select a Recipe",
+  "screen.smartcrafter.recipe_list": "Crafter Recipes",
+  "screen.smartcrafter.edit_current": "Edit Current Template",
+  "screen.smartcrafter.edit_current.tooltip": "Edit this Crafter's nine-slot template",
+  "screen.smartcrafter.loading": "Loading recipes...",
+  "screen.smartcrafter.no_recipes": "No crafting recipes are available",
+  "screen.smartcrafter.template_editor": "Crafter Template Editor",
+  "screen.smartcrafter.template_help": "Select an inventory item, left-click to set; right-click toggles a slot; empty-hand left-click clears",
+  "screen.smartcrafter.inventory": "Inventory Items (click to select)",
+  "screen.smartcrafter.slot_enabled": "Slot enabled",
+  "screen.smartcrafter.slot_disabled": "Slot disabled",
+  "screen.smartcrafter.clear_selection": "Clear selected item",
+  "screen.smartcrafter.previous_page": "Previous",
+  "screen.smartcrafter.next_page": "Next",
+  "screen.smartcrafter.saving": "Saving...",
+  "screen.smartcrafter.save_rejected": "Save failed. Reopen the Crafter and try again."
+}

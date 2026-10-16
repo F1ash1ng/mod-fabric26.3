@@ -1,0 +1,18 @@
+{
+  "screen.smartcrafter.open_recipes": "选择合成配方",
+  "screen.smartcrafter.recipe_list": "合成器配方",
+  "screen.smartcrafter.edit_current": "编辑当前模板",
+  "screen.smartcrafter.edit_current.tooltip": "编辑这台合成器保存的九槽位模板",
+  "screen.smartcrafter.loading": "正在读取配方…",
+  "screen.smartcrafter.no_recipes": "当前没有可用的合成配方",
+  "screen.smartcrafter.template_editor": "合成模板编辑器",
+  "screen.smartcrafter.template_help": "选背包物品后左键设置；右键切换槽位；空手左键清除",
+  "screen.smartcrafter.inventory": "背包物品（点击选择）",
+  "screen.smartcrafter.slot_enabled": "槽位已启用",
+  "screen.smartcrafter.slot_disabled": "槽位已关闭",
+  "screen.smartcrafter.clear_selection": "清除当前物品选择",
+  "screen.smartcrafter.previous_page": "上一页",
+  "screen.smartcrafter.next_page": "下一页",
+  "screen.smartcrafter.saving": "正在保存…",
+  "screen.smartcrafter.save_rejected": "保存失败：请重新打开合成器后重试"
+}
