@@ -30,7 +30,7 @@
 - Java **25 或更新版本**
 - JEI **31.12.0.65**：可选
 
-将编译生成的 `smart-crafter-1.0.0.jar` 和 Fabric API 放入实例的 `mods` 文件夹。使用整合包或启动器时，请确认它们与 Minecraft 26.3 兼容。
+将[预编译 JAR](https://github.com/F1ash1ng/mod-fabric26.3/raw/refs/heads/main/dist/smart-crafter-1.0.0-reset-button.jar)和 Fabric API 放入实例的 `mods` 文件夹。该文件 SHA-256：`E913881AAD49DDA91C833043A657579A3A3DDE0624DFB71F3A560F24E19D7691`。使用整合包或启动器时，请确认它们与 Minecraft 26.3 兼容。
 
 ## 从源码构建
 
