@@ -1,0 +1,13 @@
+pluginManagement {
+	repositories {
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
+// Temporary project name for the development skeleton.
+rootProject.name = 'mobility-device'

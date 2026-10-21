@@ -13,12 +13,28 @@
 - Minecraft 26.3 · Fabric Loader 0.19.5+ · Java 25+
 - SHA-256：`E913881AAD49DDA91C833043A657579A3A3DDE0624DFB71F3A560F24E19D7691`
 
+### 机动装置（Mobility Device）
+
+为玩家添加可装备的腰部喷气装置、八方向突进，以及迅捷、摔落减伤和疾跑饥饿消耗减半等机动能力。
+
+- [功能介绍与安装说明](mods/mobility-device/README.md)
+- [下载 mobility-device-1.0.0.jar](mods/mobility-device/dist/mobility-device-1.0.0.jar)
+- Minecraft 26.3 · Fabric Loader 0.19.5+ · Fabric API 0.162.0+26.3 · Java 25+
+- SHA-256：`5484053BCBFBC783685E71F713F006443456D0DBD9E75AB494C8A48B2155F63F`
+
 ## 构建模组
 
 每个模组独立构建。以 Smart Crafter 为例，在 PowerShell 中运行：
 
 ```powershell
 cd mods/smart-crafter
+.\gradlew.bat build
+```
+
+机动装置也可以独立构建：
+
+```powershell
+cd mods/mobility-device
 .\gradlew.bat build
 ```
 

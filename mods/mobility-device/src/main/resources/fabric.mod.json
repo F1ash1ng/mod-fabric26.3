@@ -1,0 +1,23 @@
+{
+	"schemaVersion": 1,
+	"id": "mobility_device",
+	"version": "${version}",
+	"name": "Mobility Device",
+	"description": "Equippable eight-direction waist jet for Fabric 26.3.",
+	"environment": "*",
+	"mixins": ["mobility_device.mixins.json"],
+	"entrypoints": {
+		"main": [
+			"com.example.mobilitydevice.MobilityDeviceMod"
+		],
+		"client": [
+			"com.example.mobilitydevice.client.MobilityDeviceClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

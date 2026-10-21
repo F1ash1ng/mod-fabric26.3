@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "package": "com.example.mobilitydevice.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "MenuInvoker",
+    "InventoryMenuMixin",
+    "PlayerLandingMixin",
+    "FeatherFallingMixin",
+    "SprintExhaustionMixin"
+  ],
+  "client": [
+    "AvatarRenderStateMixin",
+    "AvatarRendererMixin",
+    "CreativeInventoryScreenMixin",
+    "GameRendererMixin",
+    "InventoryScreenMixin",
+    "KeyboardInputMixin",
+    "PostChainAccessor",
+    "PostPassAccessor",
+    "ScreenPositionAccessor",
+    "SlotPositionAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
