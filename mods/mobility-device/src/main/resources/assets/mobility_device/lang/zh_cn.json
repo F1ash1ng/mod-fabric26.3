@@ -1,5 +1,16 @@
 {
   "item.mobility_device.waist_jet": "机动装置",
   "key.category.mobility_device.controls": "机动装置",
-  "key.mobility_device.dash": "喷气突进"
+  "key.mobility_device.dash": "喷气突进",
+  "key.mobility_device.slide": "滑铲",
+  "tooltip.mobility_device.settings_hint": "鼠标悬停时按 Shift 打开机动装置设置",
+  "screen.mobility_device.title": "机动装置设置",
+  "screen.mobility_device.option": "%s：%s",
+  "screen.mobility_device.on": "开启",
+  "screen.mobility_device.off": "关闭",
+  "screen.mobility_device.dash": "喷气",
+  "screen.mobility_device.slide": "滑铲",
+  "screen.mobility_device.wall_run": "Wall Run",
+  "screen.mobility_device.tacz": "TaCZ 功能覆盖",
+  "screen.mobility_device.mending": "击杀经验用于经验修补"
 }

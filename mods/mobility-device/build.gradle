@@ -66,8 +66,34 @@ java {
 }
 
 // Copy the current development build into the PCL instance selected for this project.
+tasks.register('removeOldPclJar', Delete) {
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.0.0.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.1.0.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.1.1.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.1.2.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.1.3.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.1.4.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.1.5.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.0.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.1.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.2.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.3.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.4.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.5.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.6.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.7.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.8.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.9.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.10.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.11.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.12.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.13.jar'
+	delete 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods/mobility-device-1.2.14.jar'
+}
+
 tasks.register('installToPclMods', Copy) {
-	dependsOn tasks.named('build')
+	dependsOn tasks.named('jar')
+	dependsOn tasks.named('removeOldPclJar')
 	from tasks.named('jar')
 	into 'D:/pcl/.minecraft/versions/26.3-Fabric modtest/mods'
 }

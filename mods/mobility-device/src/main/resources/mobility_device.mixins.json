@@ -1,25 +1,48 @@
 {
   "required": true,
   "package": "com.example.mobilitydevice.mixin",
+  "plugin": "com.example.mobilitydevice.mixin.MobilityMixinPlugin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
     "MenuInvoker",
     "InventoryMenuMixin",
+    "ExperienceOrbRepairInvoker",
+    "LivingEntityExperienceMixin",
     "PlayerLandingMixin",
     "FeatherFallingMixin",
-    "SprintExhaustionMixin"
+    "SprintExhaustionMixin",
+    "PlayerSlidePoseMixin",
+    "TaczSpeedMixin",
+    "TaczServerShootMixin",
+    "TaczServerSprintMixin"
   ],
   "client": [
     "AvatarRenderStateMixin",
     "AvatarRendererMixin",
     "CreativeInventoryScreenMixin",
+    "CreativeSettingsShortcutMixin",
     "GameRendererMixin",
+    "HumanoidSlideArmorMixin",
+    "HoveredSlotAccessor",
     "InventoryScreenMixin",
+    "KillStreakHudMixin",
     "KeyboardInputMixin",
+    "ModelPartAccessor",
+    "ModelPartWallRunSkinMixin",
+    "ModelPartsAccessor",
+    "MobilitySettingsShortcutMixin",
+    "PlayerModelAccessor",
     "PostChainAccessor",
     "PostPassAccessor",
+    "PlayerSlideModelMixin",
     "ScreenPositionAccessor",
-    "SlotPositionAccessor"
+    "SlotPositionAccessor",
+    "TaczThirdPersonMixin",
+    "TaczClientShootMixin",
+    "TaczClientSprintMixin",
+    "TaczGunPoseMixin",
+    "TaczMovementAnimationMixin",
+    "WallRunCameraMixin"
   ],
   "injectors": {
     "defaultRequire": 1

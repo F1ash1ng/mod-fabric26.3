@@ -3,7 +3,7 @@
 	"id": "mobility_device",
 	"version": "${version}",
 	"name": "Mobility Device",
-	"description": "Equippable eight-direction waist jet for Fabric 26.3.",
+	"description": "Equippable waist jet with eight-direction dash, ground slide, and wall run for Fabric 26.3.",
 	"environment": "*",
 	"mixins": ["mobility_device.mixins.json"],
 	"entrypoints": {

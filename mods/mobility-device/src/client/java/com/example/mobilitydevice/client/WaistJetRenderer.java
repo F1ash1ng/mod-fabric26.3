@@ -59,14 +59,29 @@ public final class WaistJetRenderer {
         public void submit(PoseStack pose, SubmitNodeCollector collector, int light,
                            AvatarRenderState state, float limbSwing, float limbSwingAmount) {
             WaistJetRenderState jet = (WaistJetRenderState) state;
-            if (!jet.mobility$hasWaistJet() || state.isInvisibleToPlayer) return;
+            if (!jet.mobility$hasWaistJet() || state.isInvisibleToPlayer
+                    || ((SlideRenderState) state).mobility$hasSlidePose()) return;
             int direction = jet.mobility$waistJetDirection();
             int modelIndex = direction >= 0 && direction < 8 ? direction + 1 : 0;
+            WallRunRenderState wallRun = (WallRunRenderState) state;
+            if (wallRun.mobility$wallSide() != 0) {
+                modelIndex = wallRunModelIndex(wallRun.mobility$wallSide(), wallRun.mobility$wallMovement());
+            }
             pose.pushPose();
-            getParentModel().body.translateAndRotate(pose);
+            if (wallRun.mobility$wallSide() != 0) WallRunPlayerPose.translateBody(pose, wallRun);
+            else getParentModel().body.translateAndRotate(pose);
             renderColoredCutoutModel(models[modelIndex], TEXTURE, pose, collector, light, state, -1, 0);
             pose.popPose();
         }
+    }
+
+    public static int wallRunModelIndex(int side, int movement) {
+        if (movement == 0 || side == 0) return 0;
+        // Retain the established left/right correction for the worn V2 device.
+        // Right wall: rear + LEFT port (forward), front + LEFT port (backward).
+        // Left wall:  rear + RIGHT port (forward), front + RIGHT port (backward).
+        if (side > 0) return movement > 0 ? 2 : 4;
+        return movement > 0 ? 8 : 6;
     }
 
     private static WaistModel loadModel(String name) {

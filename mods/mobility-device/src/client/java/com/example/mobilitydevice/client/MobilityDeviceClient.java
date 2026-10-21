@@ -3,6 +3,7 @@ package com.example.mobilitydevice.client;
 import com.example.mobilitydevice.MobilityDeviceMod;
 import com.example.mobilitydevice.ability.DashMotion;
 import com.example.mobilitydevice.item.WaistJetItems;
+import com.example.mobilitydevice.item.MobilitySettings;
 import com.example.mobilitydevice.network.ActivateDashPayload;
 import com.example.mobilitydevice.network.DashStartedPayload;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -37,6 +38,8 @@ public final class MobilityDeviceClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(DashStartedPayload.TYPE, (payload, context) -> {
             Minecraft client = context.client();
             if (client.player == null) return;
+            SlideClient.interruptForDash(client);
+            WallRunClient.interruptForDash();
             stopDash(client, true);
             dashPlayer = client.player;
             dashLevel = client.level;
@@ -59,12 +62,18 @@ public final class MobilityDeviceClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(MobilityDeviceClient::onTick);
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> stopDash(client, true));
         WaistJetRenderer.register();
+        SlideClient.register(CATEGORY);
+        WallRunClient.register();
+        DashCooldownHud.register();
+        SlidePlayerPose.validate();
+        WallRunPlayerPose.validate();
     }
 
     private static void onTick(Minecraft client) {
         boolean down = dashKey.isDown();
         if (down && !wasDown && client.player != null && client.gui.screen() == null
-                && WaistJetItems.isEquipped(client.player)) {
+                && WaistJetItems.isEquipped(client.player)
+                && MobilitySettings.enabled(client.player, MobilitySettings.DASH)) {
             byte forward = (byte) ((client.options.keyUp.isDown() ? 1 : 0)
                     - (client.options.keyDown.isDown() ? 1 : 0));
             byte strafe = (byte) ((client.options.keyRight.isDown() ? 1 : 0)
@@ -72,7 +81,8 @@ public final class MobilityDeviceClient implements ClientModInitializer {
             ClientPlayNetworking.send(new ActivateDashPayload(forward, strafe, client.player.getYRot()));
         }
         wasDown = down;
-        if (dashGravityOverride && (client.player != dashPlayer || client.level != dashLevel)) {
+        if (dashGravityOverride && (client.player != dashPlayer || client.level != dashLevel
+                || (client.player != null && !MobilitySettings.enabled(client.player, MobilitySettings.DASH)))) {
             stopDash(client, true);
         }
         if (client.player == null || !client.player.isAlive() || client.player.isSpectator()
@@ -80,7 +90,7 @@ public final class MobilityDeviceClient implements ClientModInitializer {
             stopDash(client, true);
             return;
         }
-        client.player.setSprinting(true);
+        client.player.setSprinting(shouldForceSprint(client.player));
         if (dashGravityOverride) {
             double progress = progress(client.player);
             if (progress >= DashMotion.TOTAL_DISTANCE - 0.001) {
@@ -105,6 +115,23 @@ public final class MobilityDeviceClient implements ClientModInitializer {
 
     public static boolean isDashActive() {
         return dashGravityOverride;
+    }
+
+    public static boolean hasMovementInput(LocalPlayer player) {
+        Minecraft client = Minecraft.getInstance();
+        return player != null && client.player == player && client.gui.screen() == null
+                && (client.options.keyUp.isDown() || client.options.keyDown.isDown()
+                || client.options.keyLeft.isDown() || client.options.keyRight.isDown());
+    }
+
+    public static boolean shouldForceSprint(LocalPlayer player) {
+        return player != null && WaistJetItems.isEquipped(player)
+                && (hasMovementInput(player) || isDashActive()
+                || SlideClient.isSlideMotionActive() || WallRunClient.isActive());
+    }
+
+    public static void interruptForWallRun() {
+        stopDash(Minecraft.getInstance(), true);
     }
 
     /** Negative means off. Capture once per frame so extraction and drawing share a snapshot. */

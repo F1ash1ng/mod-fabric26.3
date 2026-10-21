@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "R": "minecraft:redstone",
+    "I": "minecraft:iron_ingot",
+    "D": "minecraft:diamond",
+    "L": "minecraft:leather",
+    "P": "minecraft:piston"
+  },
+  "pattern": [
+    "CRC",
+    "IDI",
+    "LPL"
+  ],
+  "result": {
+    "id": "mobility_device:waist_jet"
+  }
+}

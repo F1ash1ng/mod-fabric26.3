@@ -1,5 +1,16 @@
 {
   "item.mobility_device.waist_jet": "Mobility Device",
   "key.category.mobility_device.controls": "Mobility Device",
-  "key.mobility_device.dash": "Jet Dash"
+  "key.mobility_device.dash": "Jet Dash",
+  "key.mobility_device.slide": "Slide",
+  "tooltip.mobility_device.settings_hint": "Hover and press Shift for Mobility Device settings",
+  "screen.mobility_device.title": "Mobility Device Settings",
+  "screen.mobility_device.option": "%s: %s",
+  "screen.mobility_device.on": "On",
+  "screen.mobility_device.off": "Off",
+  "screen.mobility_device.dash": "Jet Dash",
+  "screen.mobility_device.slide": "Slide",
+  "screen.mobility_device.wall_run": "Wall Run",
+  "screen.mobility_device.tacz": "TaCZ Overrides",
+  "screen.mobility_device.mending": "Kill XP for Mending"
 }

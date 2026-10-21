@@ -4,6 +4,6 @@
   "version": "1.0.0",
   "environment": "client",
   "entrypoints": {
-    "fabric-client-gametest": ["com.example.mobilitydevice.DashScreenEffectTest"]
+    "fabric-client-gametest": ["com.example.mobilitydevice.DashScreenEffectTest", "com.example.mobilitydevice.WallRunModelTest", "com.example.mobilitydevice.RemotePlayerRenderTest", "com.example.mobilitydevice.MultiplayerLifecycleTest"]
   }
 }

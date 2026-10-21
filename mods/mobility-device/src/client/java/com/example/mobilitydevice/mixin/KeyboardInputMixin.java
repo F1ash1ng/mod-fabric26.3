@@ -1,6 +1,8 @@
 package com.example.mobilitydevice.mixin;
 
 import com.example.mobilitydevice.client.MobilityDeviceClient;
+import com.example.mobilitydevice.client.SlideClient;
+import com.example.mobilitydevice.client.WallRunClient;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.world.entity.player.Input;
@@ -14,7 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class KeyboardInputMixin extends ClientInput {
     @Inject(method = "tick", at = @At("TAIL"))
     private void mobility$lockInputDuringDash(CallbackInfo ci) {
-        if (!MobilityDeviceClient.isDashActive()) return;
+        if (!MobilityDeviceClient.isDashActive() && !SlideClient.isSlideMotionActive()
+                && !WallRunClient.isActive()) return;
         keyPresses = Input.EMPTY;
         moveVector = Vec2.ZERO;
     }

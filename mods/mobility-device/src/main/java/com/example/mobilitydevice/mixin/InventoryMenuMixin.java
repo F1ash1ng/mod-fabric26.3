@@ -37,16 +37,28 @@ public abstract class InventoryMenuMixin {
         if (!fromWaist && !(index >= InventoryMenu.INV_SLOT_START && index < InventoryMenu.USE_ROW_SLOT_END
                 && moving.is(WaistJetItems.WAIST_JET))) return;
         ItemStack original = moving.copy();
-        boolean moved = fromWaist
-                ? ((MenuInvoker) this).mobility$moveItemStackTo(moving, InventoryMenu.INV_SLOT_START,
-                        InventoryMenu.USE_ROW_SLOT_END, false)
-                : ((MenuInvoker) this).mobility$moveItemStackTo(moving, WAIST_SLOT, WAIST_SLOT + 1, false);
+        if (!fromWaist) {
+            // Keep the custom equipment attachment and source inventory slot in sync.
+            if (WaistJetItems.isEquipped(player)) {
+                cir.setReturnValue(ItemStack.EMPTY);
+                return;
+            }
+            WaistJetItems.setEquipped(player, original);
+            source.setByPlayer(ItemStack.EMPTY, original);
+            menu.broadcastChanges();
+            cir.setReturnValue(original);
+            return;
+        }
+        ItemStack remaining = original.copy();
+        boolean moved = ((MenuInvoker) this).mobility$moveItemStackTo(remaining,
+                InventoryMenu.INV_SLOT_START, InventoryMenu.USE_ROW_SLOT_END, false);
         if (!moved) {
             cir.setReturnValue(ItemStack.EMPTY);
             return;
         }
-        if (moving.isEmpty()) source.setByPlayer(ItemStack.EMPTY);
-        else source.setChanged();
+        if (remaining.isEmpty()) source.setByPlayer(ItemStack.EMPTY, original);
+        else source.setByPlayer(remaining, original);
+        menu.broadcastChanges();
         cir.setReturnValue(original);
     }
 }

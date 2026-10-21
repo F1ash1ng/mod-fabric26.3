@@ -15,12 +15,13 @@
 
 ### 机动装置（Mobility Device）
 
-为玩家添加可装备的腰部喷气装置、八方向突进，以及迅捷、摔落减伤和疾跑饥饿消耗减半等机动能力。
+腰部装备槽、八向喷气、滑铲、蹬墙跑、击杀连杀经验与 TaCZ 可选兼容。
 
 - [功能介绍与安装说明](mods/mobility-device/README.md)
-- [下载 mobility-device-1.0.0.jar](mods/mobility-device/dist/mobility-device-1.0.0.jar)
+- [完整开发日志（1.0.0–1.2.15）](mods/mobility-device/DEVELOPMENT_LOG.md)
+- [下载 mobility-device-1.2.15.jar](mods/mobility-device/dist/mobility-device-1.2.15.jar)
 - Minecraft 26.3 · Fabric Loader 0.19.5+ · Fabric API 0.162.0+26.3 · Java 25+
-- SHA-256：`5484053BCBFBC783685E71F713F006443456D0DBD9E75AB494C8A48B2155F63F`
+- SHA-256：`1C24E59AA08B659B4A8E09209BB956A8723D0B092DA59BAD67E61EA6C2FA7A1D`
 
 ## 构建模组
 

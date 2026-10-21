@@ -2,6 +2,7 @@ package com.example.mobilitydevice.ability;
 
 import com.example.mobilitydevice.MobilityDeviceMod;
 import com.example.mobilitydevice.item.WaistJetItems;
+import com.example.mobilitydevice.item.MobilitySettings;
 import com.example.mobilitydevice.network.ActivateDashPayload;
 import com.example.mobilitydevice.network.DashStartedPayload;
 import com.mojang.serialization.Codec;
@@ -13,6 +14,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -49,7 +52,7 @@ public final class DashAbility {
 
     public static void activate(ServerPlayer player, ActivateDashPayload request) {
         if (player.level().getServer() == null || !player.isAlive() || player.isSpectator()
-                || !WaistJetItems.isEquipped(player)) return;
+                || !WaistJetItems.isEquipped(player) || !MobilitySettings.enabled(player, MobilitySettings.DASH)) return;
         byte forward = request.forward();
         byte strafe = request.strafe();
         if (forward < -1 || forward > 1 || strafe < -1 || strafe > 1
@@ -72,6 +75,8 @@ public final class DashAbility {
         }
         x /= length;
         z /= length;
+        SlideAbility.interruptForDash(player);
+        WallRunAbility.interruptForDash(player);
         int direction = directionIndex(forward, strafe);
         boolean previousNoGravity = player.isNoGravity();
         double startY = player.getY();
@@ -82,7 +87,7 @@ public final class DashAbility {
         player.setDeltaMovement(x * launchSpeed, DashMotion.heightAt(launchSpeed), z * launchSpeed);
         player.syncVelocity = true;
         ACTIVE.put(id, new RuntimeDash(player, x, z, player.getX(), player.getZ(),
-                startY, previousNoGravity));
+                startY, previousNoGravity, player.level().dimension()));
         player.setAttached(COOLDOWN_END, now + COOLDOWN_TICKS);
         player.setAttached(ACTIVE_DIRECTION, direction);
         player.addEffect(new MobEffectInstance(MobEffects.SPEED, BOOST_TICKS, 0, false, true, true));
@@ -100,7 +105,7 @@ public final class DashAbility {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             UUID id = player.getUUID();
             RuntimeDash dash = ACTIVE.get(id);
-            if (dash != null && dash.owner != player) {
+            if (dash != null && (dash.owner != player || !dash.dimension.equals(player.level().dimension()))) {
                 stop(id, dash, true);
                 dash = null;
             }
@@ -108,7 +113,11 @@ public final class DashAbility {
                 if (dash != null) stop(id, dash, true);
                 continue;
             }
-            player.setSprinting(true);
+            player.setSprinting(SprintIntent.shouldForceSprint(player));
+            if (dash != null && !MobilitySettings.enabled(player, MobilitySettings.DASH)) {
+                stop(id, dash, true);
+                continue;
+            }
             if (dash == null) continue;
             double progress = DashMotion.progress(player.getX(), player.getZ(), dash.startX,
                     dash.startZ, dash.x, dash.z);
@@ -161,6 +170,11 @@ public final class DashAbility {
         if (dash != null && dash.owner == player) stop(player.getUUID(), dash, true);
     }
 
+    public static boolean isActive(ServerPlayer player) {
+        RuntimeDash dash = ACTIVE.get(player.getUUID());
+        return dash != null && dash.owner == player;
+    }
+
     public static void onLanding(ServerPlayer player, double distance) {
         if (distance > 3.5 && WaistJetItems.isEquipped(player)) {
             player.addEffect(new MobEffectInstance(MobEffects.SPEED, BOOST_TICKS, 0, false, true, true));
@@ -183,11 +197,12 @@ public final class DashAbility {
         final double x, z;
         final double startX, startZ, startY;
         final boolean previousNoGravity;
+        final ResourceKey<Level> dimension;
         double lastProgress;
         int stalledTicks;
 
         RuntimeDash(ServerPlayer owner, double x, double z, double startX, double startZ,
-                    double startY, boolean previousNoGravity) {
+                    double startY, boolean previousNoGravity, ResourceKey<Level> dimension) {
             this.owner = owner;
             this.x = x;
             this.z = z;
@@ -195,6 +210,7 @@ public final class DashAbility {
             this.startZ = startZ;
             this.startY = startY;
             this.previousNoGravity = previousNoGravity;
+            this.dimension = dimension;
         }
     }
 }

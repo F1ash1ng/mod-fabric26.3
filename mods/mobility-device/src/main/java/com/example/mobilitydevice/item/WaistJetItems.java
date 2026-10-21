@@ -20,7 +20,7 @@ public final class WaistJetItems {
     private static final ResourceKey<Item> WAIST_JET_KEY = ResourceKey.create(
             BuiltInRegistries.ITEM.key(), MobilityDeviceMod.id("waist_jet"));
     public static final Item WAIST_JET = Registry.register(BuiltInRegistries.ITEM, WAIST_JET_KEY,
-            new Item(new Item.Properties().setId(WAIST_JET_KEY).stacksTo(1)));
+            new WaistJetItem(new Item.Properties().setId(WAIST_JET_KEY).stacksTo(1)));
 
     public static final AttachmentType<ItemStack> EQUIPPED = AttachmentRegistry.create(
             MobilityDeviceMod.id("equipped_waist_jet"), builder -> builder
